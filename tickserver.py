@@ -14,7 +14,6 @@ import math
 import zmq
 import random
 import numpy as np
-import matplotlib.pyplot as plt
 
 
 class InstrumentPrice(object):
