@@ -1,10 +1,21 @@
 #!/usr/bin/env python
+
+#
+# Python Script to Simulate a
+# Financial Tick Data Server
+#
+# Python for Algorithmic Trading
+# (c) Dr. Yves J. Hilpisch
+# The Python Quants GmbH
+#
+
 import time
 import math
 import zmq
 import random
 import numpy as np
 import matplotlib.pyplot as plt
+
 
 class InstrumentPrice(object):
     def __init__(self) -> None:
@@ -28,14 +39,15 @@ class InstrumentPrice(object):
         )
         return self.value
 
+
 context = zmq.Context()
 socket = context.socket(zmq.PUB)
-socket.bind('tcp://0.0.0.0:5555')
+socket.bind("tcp://0.0.0.0:5555")
 
 ip = InstrumentPrice()
 
 while True:
-    msg = '{} {:.2f}'.format(ip.symbol, ip.simulate_value())
+    msg = "{} {:.2f}".format(ip.symbol, ip.simulate_value())
     print(msg)
     socket.send_string(msg)
     time.sleep(random.random() * 2)
